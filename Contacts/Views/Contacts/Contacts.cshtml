@@ -1,0 +1,52 @@
+﻿@using Contacts.Models.DTOs
+@model ContactsViewModel
+<div class="text-center">
+    <h2>Contacts</h2>
+    <table class="table">
+        <tr>
+            <th>
+                Name
+            </th>
+            <th>
+                Phone Number
+            </th>
+            <th>
+                Email
+            </th>
+        </tr>
+        @foreach (@ContactDTO contactDTO in @Model.User.Contacts)
+        {
+            <tr>
+                <td>
+                    @contactDTO.Name
+                </td>
+                <td>
+                    @contactDTO.PhoneNumber
+                </td>
+                <td>
+                    @contactDTO.Email
+                </td>
+                <td>
+                    <form action="DeleteContact" method="Post">
+                        <input type="number" id="contactId" name="contactId" value=@contactDTO.Id hidden>
+                        <button type="submit" class="submit">delete</button>
+
+                    </form>
+                </td>
+            </tr>
+
+        }
+    </table>
+    <div>@Model.ResponseMessage.Message</div>
+    <form action="AddContact" method="post">
+        <h3>
+            Add new contact:
+        </h3>
+        <input id="name" name="name" class="input" type="string" placeholder="name" required />
+        <input id="phoneNumber" name="phoneNumber" class="input" type="tel" placeholder="123 456 789" required />
+        <input id="email" name="email" class="input" type="email" placeholder="email" required />
+        <button type="submit" class="submit">Add Contact</button>
+
+    </form>
+    
+</div>

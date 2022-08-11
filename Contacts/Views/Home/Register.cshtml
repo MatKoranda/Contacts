@@ -1,0 +1,42 @@
+﻿@model AuthViewModel
+<div class="text-center">
+    <form action="Register" method="post">
+        <div class="form">
+            <div class="title">Register</div>
+            <input id="email" name="email" class="input" type="email" placeholder="email" required />
+            <input type="password" id="pswd" name="password" placeholder="password" required />
+            <input type="password" id="pswdRep" name="passwordRepeat" onkeyup="validate_password()" placeholder="repeat password" required />
+            <span id="wrong_pass_alert"></span>
+            <input type="submit" onclick="wrong_pass_alert()" id="create" value="Register" />
+            <div>@Model.ResponseMessage.Message</div>
+        </div>
+    </form>
+</div>
+<script>
+    function validate_password() {
+
+        var pass = document.getElementById('pswd').value;
+        var confirm_pass = document.getElementById('pswdRep').value;
+        if (pass != confirm_pass) {
+            document.getElementById('wrong_pass_alert').style.color = 'red';
+            document.getElementById('wrong_pass_alert').innerHTML
+              = '☒ Use same password';
+            document.getElementById('create').disabled = true;
+            document.getElementById('create').style.opacity = (0.4);
+        } else {
+            document.getElementById('wrong_pass_alert').style.color = 'green';
+            document.getElementById('wrong_pass_alert').innerHTML =
+                '🗹 Password Matched';
+            document.getElementById('create').disabled = false;
+            document.getElementById('create').style.opacity = (1);
+        }
+    }
+
+    function wrong_pass_alert() {
+        if (document.getElementById('pswd').value != "" &&
+            document.getElementById('pswdRep').value != "")
+             else {
+            alert("Please fill all the fields");
+        }
+    }
+</script>

@@ -122,10 +122,11 @@ namespace Contacts.Services
                 return null;
             }
         }
-        public ResponseMessage LoginUser(string email,string password, out bool isValid)
+        public ResponseMessage LoginUser(string email, string password, out bool isValid)
         {
             User user = userService.GetUserByEmail(email);
-            if (!user.PasswordCheck(password))
+
+            if (user == null || !user.PasswordCheck(password))
             {
                 isValid = false;
                 return new ResponseMessage("Invalid credentials");
